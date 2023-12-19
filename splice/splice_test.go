@@ -13,7 +13,7 @@ import (
 	"testing"
 
 	"github.com/mkmik/filetransformer"
-	"github.com/vmware-labs/go-yaml-edit/splice"
+	"github.com/stristr/go-yaml-edit/splice"
 	"golang.org/x/text/transform"
 )
 

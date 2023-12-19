@@ -7,13 +7,13 @@ import (
 	"sort"
 	"unicode/utf8"
 
-	"github.com/vmware-labs/go-yaml-edit/splice"
+	"github.com/stristr/go-yaml-edit/splice"
 	"golang.org/x/text/transform"
 	"gopkg.in/yaml.v3"
 )
 
-// Node returns a selection that spans over a YAML node.
-func Node(n *yaml.Node) splice.Selection {
+// Selection returns a selection that spans over a YAML node.
+func Selection(n *yaml.Node) splice.Selection {
 	// IndexEnd incorrectly includes trailing newline when strings are multiline.
 	// TODO(mkm): remove hack once upstream is patched
 	d := 0

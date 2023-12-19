@@ -5,13 +5,13 @@ package yamled_test
 
 import (
 	"fmt"
+	"gopkg.in/yaml.v3"
 	"log"
 	"testing"
 
-	yamled "github.com/vmware-labs/go-yaml-edit"
+	yamled "github.com/stristr/go-yaml-edit"
 	yptr "github.com/vmware-labs/yaml-jsonpointer"
 	"golang.org/x/text/transform"
-	"gopkg.in/yaml.v3"
 )
 
 // ExampleT shows how to use the transformer to edit a YAML source in place.
@@ -40,8 +40,8 @@ metadata:
 	}
 
 	out, _, err := transform.String(yamled.T(
-		yamled.Node(nameNode).With("bar"),
-		yamled.Node(nsNode).With("otherns"),
+		yamled.Selection(nameNode).With("bar"),
+		yamled.Selection(nsNode).With("otherns"),
 	), src)
 	if err != nil {
 		log.Fatal(err)
@@ -174,8 +174,8 @@ baz: end
 				}
 
 				buf, _, err = transform.Bytes(yamled.T(
-					yamled.Node(foo).With(tc.foo),
-					yamled.Node(bar).With(tc.bar),
+					yamled.Selection(foo).With(tc.foo),
+					yamled.Selection(bar).With(tc.bar),
 				), []byte(cfg.src))
 				if err != nil {
 					t.Fatal(err)
@@ -249,8 +249,8 @@ www:
 			}
 
 			buf, _, err = transform.Bytes(yamled.T(
-				yamled.Node(foo).With(tc.foo),
-				yamled.Node(bar).With(tc.bar),
+				yamled.Selection(foo).With(tc.foo),
+				yamled.Selection(bar).With(tc.bar),
 			), []byte(src))
 			if err != nil {
 				t.Fatal(err)
@@ -301,7 +301,7 @@ bar: y
 	}
 
 	out, _, err := transform.Bytes(yamled.T(
-		yamled.Node(foo).With(rep),
+		yamled.Selection(foo).With(rep),
 	), []byte(src))
 	if err != nil {
 		t.Fatal(err)
